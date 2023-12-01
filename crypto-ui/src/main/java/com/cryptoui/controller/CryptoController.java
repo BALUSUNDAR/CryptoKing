@@ -96,7 +96,7 @@ public ModelAndView login(){
 
                 Integer userSessionId =  id;
                 // Integer userSessionId = null;
-                session.setAttribute("uId", userSessionId );
+                session.setAttribute("uId", userSessionId);
 
                 return details;
             // }

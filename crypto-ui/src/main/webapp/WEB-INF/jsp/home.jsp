@@ -88,6 +88,7 @@
             
             document.getElementById('btn').style.display="block";
             document.getElementById('wallet-amount').style.display="block";
+            document.getElementById('wallet-amount').style.marginTop="10px";
 
             document.getElementById('btn').addEventListener('click',function(){
 

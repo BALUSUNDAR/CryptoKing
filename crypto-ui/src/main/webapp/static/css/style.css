@@ -34,6 +34,7 @@ body{
     flex-direction: row;
     justify-content:space-between;
     display: flex;
+    background-color: #0000005a;
 }
 #logo-container{
     display: flex;
@@ -92,7 +93,7 @@ a:hover {
     background-repeat: no-repeat;
     transition: background-size 400ms;
     border-radius: 10px; 
-  }
+}
 
 .login-class-name{
      display: none;
@@ -104,6 +105,14 @@ a:hover {
 
 .logout{
     display:none;
+}
+
+.wallet{
+    display:none;
+}
+
+.vallet{
+    display: none;
 }
 
 hr{

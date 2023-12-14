@@ -18,7 +18,6 @@ app=Flask("__annotaion__")
 
 def get_db_connection():
     Session=sessionmaker(bind=db_engine)
-    print("Session")
     return Session()
 
 @app.route('/adduser', methods=['POST'])
@@ -81,7 +80,7 @@ def get_details_by():
     except Exception as e:
         print(str(e))
         
-        res['status']="Failed."
+        res['status']="Failed"
         res['message']="Register before Login."
         
         
@@ -91,7 +90,6 @@ def get_details_by():
 
 @app.route('/addcoin', methods=['POST'])
 def coin_add():
-    
     
     res={
         'status':'success',
@@ -169,11 +167,11 @@ def wallet_amount_calculation():
 ##############################################################################################################
 
 
-@app.route('/add_image', methods=['POST'])
-def adding_image_in_db():
+@app.route('/editeddetails', methods=['POST'])
+def edited_details():
     
     
-    img = Image.open(request.files['file'])
+    # img = Image.open(request.files['file'])
     
     res={
         'status':'success',
@@ -193,9 +191,12 @@ def adding_image_in_db():
         print(str(e))
         
         res['status']="Failed"
-        res['message']="Getting Exception on wa"
+        res['message']="Getting Exception on edited_details "
         
     return json.dumps(res)
+
+
+#########################################################################################################################
 
    
 file_config = yaml.load(open(os.path.join(root_path, "..", "conf", "config.yml"))) # type: ignore

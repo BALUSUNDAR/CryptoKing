@@ -20,7 +20,10 @@
                     <li><a href="#Home" id="link-home">Home</a></li>
                     <li ><a href="#Login" id="link-login">Login</a></li>
                     <li><a class = "link-profile" id="link-profile">Profile</a></li>
+                    
+                    <li><a class="wallet" id="wallet-button">Wallet</a></li>
                     <li><a class="logout" id="logout-button">Logout</a></li>
+                    <li><a class="vallet" id="vallet-button">Vallet</a></li>
                 </ul>
             </div>    
         </div>
@@ -33,11 +36,7 @@
                 <img src="static/images/crypto1.jpg" alt="image1" class="slide-images" style ="width:100%">
                 <img src="static/images/crypto2.jpg" alt="image1" class="slide-images" style ="width:100%">
                 <img src="static/images/crypto3.jpg" alt="image1" class="slide-images" style ="width:100%">
-            </div>
-            <div>
-                <input id="wallet-amount" type="number"><button id="btn">deposit</button>
-            </div>
-            
+            </div>            
         </div>   
     </div>
 
@@ -67,47 +66,20 @@
         if(`${uId}`.length !== 0){
             document.getElementById("link-login").classList.add("login-class-name");
             document.getElementById("link-profile").classList.remove("link-profile-class");
+            //document.getElementById("wallet-button").classList.remove("wallet");
             document.getElementById("logout-button").classList.remove("logout");
+            document.getElementById("vallet-button").classList.remove("vallet");
             document.getElementById("link-profile").style.cursor ="pointer";
             document.getElementById("logout-button").style.cursor="pointer";
+            document.getElementById("wallet-button").style.cursor="pointer";
             console.log("not null");
             console.log(typeof(v));
 
-            //post method for the wallet-amount actions
-            async function postData(url="",data={}){
-                const response= await fetch (url,{
-                    method : "POST",
-                    headers :{
-                        "Content-Type": "application/x-www-form-urlencoded"
-                    },
-                    body: new URLSearchParams(data).toString()
-                });
-    
-                return response.json();
-            }
+
+
+
+
             
-            document.getElementById('btn').style.display="block";
-            document.getElementById('wallet-amount').style.display="block";
-            document.getElementById('wallet-amount').style.marginTop="10px";
-
-            document.getElementById('btn').addEventListener('click',function(){
-
-
-                var wallet=document.getElementById('wallet-amount').value;
-
-                postData("/wallet_amount",{wallet_amount:wallet_amount}).then((response)=>{
-
-                    if(response.status == "success"){   
-                        console.log(response.data.uid);
-                        console.log(response.data.wallet_amount);
-                        alert("wallet amount added done.");
-                    }
-                    else{
-                        alert("wallet amount added failed.");
-                    }
-
-                })
-            })
 
             //logout button action
             async function logoutFunction(url=""){
@@ -123,8 +95,8 @@
                                console.log(response);
                                if(response.data == "success"){
                                 console.log("logut success", "this is the userid", `${uId}`);
-                                alert("Redirecting to Login")
-                                window.location.href = "/login";
+                                alert("Redirecting to Home")
+                                window.location.href = "/home";
                                }
                                else{
                                 console.log("logut failure");
@@ -137,8 +109,9 @@
         else{
             document.getElementById("link-login").classList.remove("login-class-name");
             document.getElementById("link-profile").classList.add("link-profile-class");
+            //document.getElementById("wallet-button").classList.add("wallet");
             document.getElementById("logout-button").classList.add("logout");
-        
+            document.getElementById("vallet-button").classList.add("vallet");
             console.log("null");
         }   
 
@@ -162,7 +135,9 @@
         document.getElementById("link-profile").addEventListener('click',function(){
             window.location.href = "/profile";
         })
-
+        document.getElementById("wallet-button").addEventListener('click',function(){
+            window.location.href = "/wallet";
+        })
 
 
     </script>

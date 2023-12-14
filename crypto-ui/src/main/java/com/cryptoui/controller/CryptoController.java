@@ -24,6 +24,7 @@ public class CryptoController {
 
     public Integer id=null;
     public String uid=null;
+    public String name=null;
 
 
     @Autowired
@@ -90,13 +91,17 @@ public ModelAndView login(){
                 JSONObject json=new JSONObject(details);
                 JSONObject id_data=json.getJSONObject("data");
                 id=id_data.getInt("sid");
+                name=id_data.getString("uname");
                 System.out.println(id);
+                System.out.println(name.toUpperCase());
 
 
 
-                Integer userSessionId =  id;
+                Integer userSessionId = id;
                 // Integer userSessionId = null;
                 session.setAttribute("uId", userSessionId);
+                session.setAttribute("uname", name);
+                // session.getAttribute("uname");
 
                 return details;
             // }
@@ -196,16 +201,22 @@ public ModelAndView home(){
     return new ModelAndView("home");
 }
 
+@GetMapping(value = "/wallet")
+public ModelAndView wallet_amount(){
+    return new ModelAndView("wallet");
+}
+
 
 @PostMapping(value = "/wallet_amount")
-   public String add_wallet_amount(HttpSession session, Float wallet_amount) throws JsonProcessingException {
+   public String add_wallet_amount(HttpSession session, Float wallet_amt) throws JsonProcessingException {
          try {
             // Object uid =session.getAttribute("uid");
             // System.out.println(sid);
             // if(uid != null) {
                 Map<String, Object> params = new HashMap<String, Object>();
                 params.put("uid",id);
-                params.put("wallet_amount", wallet_amount);  
+                System.out.println(id);
+                params.put("wallet_amount", wallet_amt);  
                 System.out.println(params);  
                 String details = restUtil.post("http://localhost:5000/wallet_amount", params);
                 System.out.println(details);
@@ -238,9 +249,40 @@ public ModelAndView profile(){
     return new ModelAndView("profile");
 }
 
+@PostMapping(value = "/profile")
+   public String update_profile(HttpSession session) throws JsonProcessingException {
+         try {
+                Map<String, Object> params = new HashMap<String, Object>();
+                System.out.println(params);  
+                String details = restUtil.post("http://localhost:5000/editeddetails", params);
+                System.out.println(details);
+                return details;
+            // }
+
+            // JSONObject response = new JSONObject();
+            // response.put("status", "failure");
+            // response.put("message", "You need to be logged in to view details!");
+            // response.put("data", JSONObject.NULL);
+
+            // return response.toString();
+
+        } catch(Exception ex) {
+            LOGGER.error("details", ex);
+            JSONObject response = new JSONObject();
+            response.put("status", "Failed.");
+            response.put("message", "eeeeeeeeeeeeeeeeeee try again");
+            response.put("data", JSONObject.NULL);
+
+            return response.toString();
+        }
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
 }
+
+
 
 

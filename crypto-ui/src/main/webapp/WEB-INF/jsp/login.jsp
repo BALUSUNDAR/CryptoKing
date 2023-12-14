@@ -150,7 +150,7 @@
                         }
                     }
                     else{
-                        alert("Wrong Username or password.");
+                        alert("Please Register before Login.");
                     }
                 });
             }
